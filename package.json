@@ -1,10 +1,8 @@
 {
 	"name": "@elijahjcobb/***",
-	"version": "0.0.1",
-	"description": "A package to send and receive data using promises.",
-	"keywords": [
-
-	],
+	"version": "0.1.0",
+	"description": "",
+	"keywords": [],
 	"main": "js/index",
 	"types": "dts",
 	"scripts": {
@@ -28,12 +26,12 @@
 		"url": "https://github.com/elijahjcobb/***/issues"
 	},
 	"homepage": "https://github.com/elijahjcobb/***#readme",
-	"dependencies": {
-
-	},
+	"dependencies": {},
 	"devDependencies": {
 		"@types/node": "latest",
 		"typescript": "latest",
-		"tslint": "latest"
+		"tslint": "latest",
+		"jest": "latest",
+		"@types/jest": "latest"
 	}
 }
