@@ -4,7 +4,8 @@
 	"description": "",
 	"keywords": [],
 	"main": "js/index",
-	"types": "dts",
+	"types": "dts/index",
+	"files": ["js", "dts"],
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"prepublishOnly": "npm run compile",
