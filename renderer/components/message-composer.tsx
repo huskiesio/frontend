@@ -34,7 +34,7 @@ export default ({onMessage}: {onMessage: Function}): React.ReactElement<{}> => {
 
   return (
 	<>
-		<textarea value={message} onKeyDown={handleKeyDown} onKeyUp={handleKeyUp} onChange={(e: React.KeyboardEvent<HTMLTextAreaElement>): void => setMessage(e.target.value)} placeholder="Start typing..."/>
+		<textarea value={message} onKeyDown={handleKeyDown} onKeyUp={handleKeyUp} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>): void => setMessage(e.target.value)} placeholder="Start typing..."/>
 	</>
   );
 };
