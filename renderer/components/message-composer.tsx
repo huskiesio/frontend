@@ -7,7 +7,7 @@ export default ({onMessage}: {onMessage: Function}): React.ReactElement<{}> => {
   const [message, setMessage]: [string, Function] = useState("");
   const [shiftHeld, setShiftHeld]: [boolean, Function] = useState(false);
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>): void => {
+  const handleKeyDown: React.KeyboardEventHandler<HTMLTextAreaElement> = (e: React.KeyboardEvent<HTMLTextAreaElement>): void => {
 	const {keyCode}: {keyCode: number} = e;
 
 	if (keyCode === SHIFT) {
@@ -17,14 +17,17 @@ export default ({onMessage}: {onMessage: Function}): React.ReactElement<{}> => {
 	if (keyCode === ENTER) {
 		if (!shiftHeld) {
 		e.preventDefault();
+
+	if (message !== "") {
 		onMessage(message);
+	}
 
 		setMessage("");
 		}
 	}
   };
 
-  const handleKeyUp = (e: React.KeyboardEvent<HTMLTextAreaElement>): void => {
+  const handleKeyUp: React.KeyboardEventHandler<HTMLTextAreaElement> = (e: React.KeyboardEvent<HTMLTextAreaElement>): void => {
 	const {keyCode}: {keyCode: number} = e;
 
 	if (keyCode === SHIFT) {

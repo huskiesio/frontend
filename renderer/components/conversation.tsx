@@ -7,20 +7,9 @@ interface Message {
 }
 
 export default (): React.ReactElement<{}> => {
-  const [messages, setMessages]: [Message[], Function] = useState([
-	{
-		message: "**Bolded text**"
-	},
-	{
-		message: "```javascript\nconst hello = 'world';\n```"
-	},
-	{
-		message: "$\\sqrt{3}$"
-	}
-  ]);
+  const [messages, setMessages]: [Message[], Function] = useState([]);
 
   const handleNewMessage: Function = (msg: string): void => {
-	console.log(msg);
 	setMessages([...messages, {message: msg}]);
   };
 
