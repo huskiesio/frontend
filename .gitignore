@@ -3,3 +3,6 @@ node_modules
 dts
 js
 package-lock.json
+.next
+app
+dist

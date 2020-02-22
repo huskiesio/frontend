@@ -1,18 +1,21 @@
 {
-	"name": "@elijahjcobb/***",
+	"name": "@huskiesio/frontend",
 	"version": "0.1.0",
 	"description": "",
 	"keywords": [],
-	"main": "js/index",
+	"main": "app/background.js",
 	"types": "dts/index",
-	"files": ["js", "dts"],
+	"files": [
+		"js",
+		"dts"
+	],
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"prepublishOnly": "npm run compile",
-		"compile": "npm run clean && /usr/local/bin/tsc -p tsconfig.json",
-		"watch": "tsc -w -p .",
-		"clean": "rm -rf js && rm -rf dts",
-		"start": "node js/index.js"
+		"test": "npm run lint && jest",
+		"lint": "tslint --project .",
+		"lint-fix": "tslint --fix --project .",
+		"dev": "nextron",
+		"build": "nextron build",
+		"postinstall": "electron-builder install-app-deps"
 	},
 	"repository": {
 		"type": "git",
@@ -27,12 +30,25 @@
 		"url": "https://github.com/elijahjcobb/***/issues"
 	},
 	"homepage": "https://github.com/elijahjcobb/***#readme",
-	"dependencies": {},
+	"dependencies": {
+		"electron-serve": "^0.4.1",
+		"electron-store": "^5.1.1"
+	},
 	"devDependencies": {
+		"@types/jest": "latest",
 		"@types/node": "latest",
-		"typescript": "latest",
-		"tslint": "latest",
+		"@types/react": "^16.9.22",
+		"@types/react-dom": "^16.9.5",
+		"@zeit/next-sass": "^1.0.1",
+		"electron": "^8.0.1",
+		"electron-builder": "^22.3.2",
 		"jest": "latest",
-		"@types/jest": "latest"
+		"next": "^9.2.2",
+		"nextron": "^5.14.4",
+		"node-sass": "^4.13.1",
+		"react": "^16.12.0",
+		"react-dom": "^16.12.0",
+		"tslint": "latest",
+		"typescript": "latest"
 	}
 }
