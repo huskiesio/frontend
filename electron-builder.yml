@@ -1,6 +1,6 @@
-appId: com.example.nextron
-productName: My Nextron App
-copyright: Copyright © 2018 Yoshihide Shiono
+appId: io.huskies.chat
+productName: HuskyChat
+copyright: GNU General Public License 3.0
 directories:
   output: dist
   buildResources: resources
