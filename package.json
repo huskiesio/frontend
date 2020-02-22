@@ -31,6 +31,7 @@
 	},
 	"homepage": "https://github.com/elijahjcobb/***#readme",
 	"dependencies": {
+		"@huskiesio/message-renderer": "^0.1.2",
 		"electron-serve": "^0.4.1",
 		"electron-store": "^5.1.1"
 	},

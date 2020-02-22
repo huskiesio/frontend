@@ -1,6 +1,9 @@
 import React from "react";
 import Head from "next/head";
 import Link from "next/link";
+import MessageRenderer from '@huskiesio/message-renderer'
+
+const code = "```javascript\nconst hello = 'world';\n```\n$\\sqrt{3}$";
 
 const Next: React.ComponentType = (): React.ReactElement<{}> => {
   return (
@@ -15,6 +18,9 @@ const Next: React.ComponentType = (): React.ReactElement<{}> => {
 			<a>Go to home page</a>
 			</Link>
 		</p>
+    <p>
+      <MessageRenderer text={code}/>
+    </p>
 		</div>
 	</React.Fragment>
   );

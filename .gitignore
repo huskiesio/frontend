@@ -6,3 +6,4 @@ package-lock.json
 .next
 app
 dist
+.DS_Store
