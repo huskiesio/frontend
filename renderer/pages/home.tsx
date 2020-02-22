@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import "./styles/home.scss";
 
-const Home = () => {
+const Home: React.ComponentType = (): React.ReactElement<{}> => {
   return (
 	<React.Fragment>
 		<Head>
