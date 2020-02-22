@@ -1,14 +1,10 @@
 {
 	"name": "@huskiesio/frontend",
 	"version": "0.1.0",
-	"description": "",
-	"keywords": [],
+	"description": "Frontend Electron app for the HuskyChat web app.",
 	"main": "app/background.js",
 	"types": "dts/index",
-	"files": [
-		"js",
-		"dts"
-	],
+	"keywords": [],
 	"scripts": {
 		"test": "npm run lint && jest",
 		"lint": "tslint --project .",
@@ -17,19 +13,26 @@
 		"build": "nextron build",
 		"postinstall": "electron-builder install-app-deps"
 	},
+	"files": [
+		"js",
+		"dts"
+	],
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/elijahjcobb/***.git"
+		"url": "git+https://github.com/huskiesio/frontend.git"
 	},
 	"publishConfig": {
 		"access": "public"
 	},
-	"author": "Elijah Cobb <elijah@elijahcobb.com> (https://elijahcobb.com/)",
-	"license": "MIT",
+	"contributors": [
+		"Max Isom <hi@maxisom.me> (https://maxisom.me/)",
+		"Trevor Sears <trevorsears.main@gmail.com> (https://trevorsears.io/)"
+	],
+	"license": "GPL-3.0-or-later",
 	"bugs": {
-		"url": "https://github.com/elijahjcobb/***/issues"
+		"url": "https://github.com/huskiesio/frontend/issues"
 	},
-	"homepage": "https://github.com/elijahjcobb/***#readme",
+	"homepage": "https://github.com/huskiesio/frontend#readme",
 	"dependencies": {
 		"@huskiesio/message-renderer": "^0.1.2",
 		"electron-serve": "^0.4.1",
