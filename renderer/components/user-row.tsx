@@ -1,14 +1,15 @@
 import React from "react";
 import Avatar from "./avatar";
 import "./styles/user-row.scss";
+import { IHCBotUser } from "@huskiesio/bot/dts/types";
 
-export default ({className = "", user, expanded = false, highlighted = false}: {className?: string, user: User, expanded?: boolean, highlighted?: boolean}): React.ReactElement<{}> => {
+export default ({className = "", user, expanded = false, highlighted = false, onClick}: {className?: string, user: IHCBotUser, expanded?: boolean, highlighted?: boolean, onClick?: Function}): React.ReactElement<{}> => {
   return (
-	<div className={`user-row ${className} ${expanded ? "expanded" : ""} ${highlighted ? "highlighted" : ""}`}>
-		<Avatar className="avatar" user={user}/>
+	<div onClick={e => onClick ? onClick(e) : ""} className={`user-row ${className} ${expanded ? "expanded" : ""} ${highlighted ? "highlighted" : ""}`}>
+		<Avatar className="avatar" id={user.id}/>
 
 		<div className="name">
-		{user.name}
+		  {`${user.firstName()} ${user.lastName()}`}
 		</div>
 	</div>
   );

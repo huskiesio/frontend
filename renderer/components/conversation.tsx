@@ -1,26 +1,28 @@
 import React, {useState, useRef} from "react";
+import {useGlobal} from "reactn";
 import Message from "./message";
 import MessageComposer from "./message-composer";
 import "./styles/conversation.scss";
+import { StuffedThread, ReducedMessage } from "../types";
+import { IHCBotMessage } from "@huskiesio/bot/dts/types";
 
-export default ({className, header, tagline}: {className: string, header: string, tagline: string}): React.ReactElement<{}> => {
+const ENTER: number = 13;
+
+export default ({className, thread, onHeaderChange, onTaglineChange, onNewMessage}: {className: string, thread: StuffedThread, onHeaderChange: Function, onTaglineChange: Function, onNewMessage: Function}): React.ReactElement<{}> => {
   const messageContainerRef: React.RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
 
-  const [messages, setMessages]: [Message[], Function] = useState([
-	{
-		message: "**Bolded text**",
-		author: {
-		name: "Max Isom",
-		avatar: "https://s3.amazonaws.com/keybase_processed_uploads/d24c7479498157f2cb81e185977dfd05_360_360.jpeg"
-		}
-	}
-  ]);
+  const userId = useGlobal("currentUserId")[0];
+  const threadId = useGlobal("currentThread")[0];
 
-  const handleNewMessage: Function = (msg: string): void => {
-	setMessages([...messages, {message: msg, author: {
-	name: "Max",
-	avatar: "https://s3.amazonaws.com/keybase_processed_uploads/d24c7479498157f2cb81e185977dfd05_360_360.jpeg"
-  }}]);
+  const [isHeaderBeingEdited, editHeader] = useState(false);
+  const [isTaglineBeingEdited, editTagline] = useState(false);
+
+  const handleNewMessage: Function = (message: string): void => {
+	onNewMessage({
+		threadId,
+		message
+	});
+
 
   // Scroll to bottom
   if (messageContainerRef.current) {
@@ -28,16 +30,49 @@ export default ({className, header, tagline}: {className: string, header: string
   }
   };
 
+  const reducedMessages = thread.messages.reduce((accum: ReducedMessage[], message: IHCBotMessage) => {
+	if (accum[accum.length - 1] && accum[accum.length - 1].sender().id === message.sender().id) {
+		accum[accum.length - 1].messages.push(message);
+	} else {
+		accum.push({...message, messages: [message]});
+	}
+
+	return accum;
+  }, []);
+
   return (
 	<div className={`${className ? className : ""} conversation`}>
 		<div className="header-container">
-		<h1>{header}</h1>
-		<h3>{tagline}</h3>
+	{
+		isHeaderBeingEdited ? (
+		<input className="h1 inline" autoFocus defaultValue={thread.name()} onKeyDown={e => {
+			if (e.keyCode === ENTER) {
+			editHeader(false);
+			onHeaderChange(e.currentTarget.value);
+			}
+		}}/>
+		) : (
+		<h1 onClick={() => editHeader(true)}>{thread.name()}</h1>
+		)
+	}
+
+	{
+		isTaglineBeingEdited ? (
+		<input className="h3 inline" autoFocus defaultValue={thread.description()} onKeyDown={e => {
+			if (e.keyCode === ENTER) {
+			editTagline(false);
+			onTaglineChange(e.currentTarget.value);
+			}
+		}}/>
+		) : (
+		<h3 className="weight-normal" onClick={() => editTagline(true)}>{thread.description()}</h3>
+		)
+	}
 		</div>
 
 		<div className="messages" ref={messageContainerRef}>
 			{
-				messages.map((m: Message): React.ReactElement<{}> => <Message key={m.message} message={m.message} author={m.author}/>)
+				reducedMessages.map((m: ReducedMessage): React.ReactElement<{}> => <Message key={JSON.stringify(m.messages)} message={m}/>)
 			}
 		</div>
 

@@ -2,26 +2,38 @@ import React from "react";
 import MessageRenderer from "@huskiesio/message-renderer";
 import Avatar from "./avatar";
 import "./styles/message.scss";
+import { ReducedMessage } from "../types";
+import { IHCBotMessage } from "@huskiesio/bot/dts/types";
 
-const self = "Max Isom";
+const self = "1";
 
-export default ({message, author}: {message: string, author: User}): React.ReactElement<{}> => {
+export default ({message}: {message: ReducedMessage}): React.ReactElement<{}> => {
+  const isSelfMessage = (msg: ReducedMessage) => msg.sender().id === self;
+
   return (
-	<div className={`message-container ${author.name === self ? "self" : ""}`}>
+	<div className={`message-container ${isSelfMessage(message) ? "self" : ""}`}>
 		{
-		author.name === self ? <div/> : (
-			<Avatar user={author}/>
+		isSelfMessage(message) ? <div/> : (
+			<Avatar id={message.sender().id}/>
 		)
 		}
 
 		<div className="info-container">
-		<div className="name">{author.name}</div>
-		<MessageRenderer text={message} className="message"/>
+		<div className="name">{`${message.sender().firstName()} ${message.sender().lastName()}`}</div>
+
+	<div className="messages-list">
+		{
+		message.messages.map(m => <div>
+		<MessageRenderer text={m.payload()} className="message"/>
+		<div className="timestamp">{new Date(m.timestamp()).toLocaleString()}</div>
+	</div>)
+		}
+	</div>
 		</div>
 
 		{
-		author.name === self ? (
-			<Avatar user={author}/>
+		isSelfMessage(message) ? (
+			<Avatar id={message.sender().id}/>
 		) : (
 			<div/>
 		)

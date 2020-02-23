@@ -43,11 +43,29 @@ export default ({onMessage, className}: {onMessage: Function, className: string}
 	if (inputRef.current) {
 		inputRef.current.focus();
 	}
+
   }, []);
+
+  const onInput: React.FormEventHandler<HTMLTextAreaElement> = (e: any) => {
+	setMessage(e.currentTarget.value);
+  };
+
+  useEffect(() => {
+	let extraPadding = 0;
+
+	if (message.split("\n").length >= 2) {
+		extraPadding = 1;
+	}
+
+	if (inputRef.current) {
+		inputRef.current.style.height = "auto";
+		inputRef.current.style.height = `calc(${inputRef.current.scrollHeight}px - 3.2rem + ${extraPadding}rem)`;
+	}
+  }, [message]);
 
   return (
 	<div className={`${className ? className : ""} message-composer`}>
-		<textarea ref={inputRef} value={message} onKeyDown={handleKeyDown} onKeyUp={handleKeyUp} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>): void => setMessage(e.target.value)} placeholder="Start typing..."/>
+		<textarea ref={inputRef} value={message} onKeyDown={handleKeyDown} onKeyUp={handleKeyUp} onChange={onInput} placeholder="Start typing..."/>
 	</div>
   );
 };

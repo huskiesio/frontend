@@ -21,13 +21,14 @@ export default (): React.ReactElement<{}> => {
 	<div className="sign-in">
 		<div className="box">
 		<h1>Sign In</h1>
-		<span>or <Link href="/signup"><a>sign up</a></Link></span>
 
 		<form onSubmit={handleSignIn}>
 			<input placeholder="Username" value={username} onChange={e => setUsername(e.target.value)}/>
 			<input placeholder="Password" type="password" value={password} onChange={e => setPassword(e.target.value)}/>
-			<button>Sign in</button>
+			<button className="blue">Sign in</button>
 		</form>
+
+	<span>or <Link href="/signup"><a>sign up</a></Link></span>
 		</div>
 	</div>
   );
