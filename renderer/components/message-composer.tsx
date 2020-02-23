@@ -1,9 +1,12 @@
-import React, {useState} from "react";
+import React, {useState, useRef, useEffect} from "react";
+import "./styles/message-composer.scss";
 
 const SHIFT: number = 16;
 const ENTER: number = 13;
 
-export default ({onMessage}: {onMessage: Function}): React.ReactElement<{}> => {
+export default ({onMessage, className}: {onMessage: Function, className: string}): React.ReactElement<{}> => {
+  const inputRef: React.RefObject<HTMLTextAreaElement> = useRef<HTMLTextAreaElement>(null);
+
   const [message, setMessage]: [string, Function] = useState("");
   const [shiftHeld, setShiftHeld]: [boolean, Function] = useState(false);
 
@@ -35,9 +38,16 @@ export default ({onMessage}: {onMessage: Function}): React.ReactElement<{}> => {
 	}
   };
 
+  // Focus textarea on load
+  useEffect(() => {
+	if (inputRef.current) {
+		inputRef.current.focus();
+	}
+  }, []);
+
   return (
-	<>
-		<textarea value={message} onKeyDown={handleKeyDown} onKeyUp={handleKeyUp} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>): void => setMessage(e.target.value)} placeholder="Start typing..."/>
-	</>
+	<div className={`${className ? className : ""} message-composer`}>
+		<textarea ref={inputRef} value={message} onKeyDown={handleKeyDown} onKeyUp={handleKeyUp} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>): void => setMessage(e.target.value)} placeholder="Start typing..."/>
+	</div>
   );
 };

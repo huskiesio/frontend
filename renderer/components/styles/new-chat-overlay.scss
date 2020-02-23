@@ -1,0 +1,36 @@
+.new-chat-overlay {
+  background-color: lighten(black, 10%);
+  width: 50vw;
+  height: 50vh;
+  padding: 2rem;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+
+  input[type="text"] {
+    flex-grow: 1;
+  }
+
+  .directory-results {
+    margin: 1rem;
+
+    h3 {
+      text-align: center;
+    }
+
+    .user-details {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      button {
+        align-self: flex-end;
+      }
+    }
+  }
+
+  > button {
+    margin-top: auto;
+  }
+}

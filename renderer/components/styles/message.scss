@@ -1,0 +1,33 @@
+.message-container {
+  display: flex;
+  flex-direction: row;
+
+  &.self {
+    margin-left: auto;
+
+    .name {
+      text-align: right;
+    }
+
+    .info-container {
+      .message {
+        background-color: lighten(black, 40%);
+      }
+    }
+  }
+
+  .info-container {
+    .name {
+      margin-bottom: 0.5rem;
+    }
+
+    .message {
+      background-color: gold;
+      color: black;
+      border-radius: 10px;
+      padding: 0.2rem 1rem;
+    }
+  }
+
+  margin-bottom: 2rem;
+}
