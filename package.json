@@ -35,6 +35,7 @@
 	"homepage": "https://github.com/huskiesio/frontend#readme",
 	"dependencies": {
 		"@huskiesio/message-renderer": "^0.1.4",
+		"@huskiesio/bot": "^0.1.0",
 		"electron-serve": "^0.4.1",
 		"electron-store": "^5.1.1"
 	},
