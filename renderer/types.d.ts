@@ -1,9 +1,8 @@
-interface User {
-  name: string,
-  avatar?: string
+interface HTMLInputEvent extends Event {
+    target: HTMLInputElement & EventTarget;
 }
 
-interface Message {
-  message: string;
-  author: User
+interface ReducedMessage {
+senderId: string;
+messages: IHCAPIMessage[];
 }

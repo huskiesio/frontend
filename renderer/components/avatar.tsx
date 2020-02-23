@@ -1,23 +1,16 @@
 import React from "react";
 import "./styles/avatar.scss";
+import {getAvatarById} from '../utils/user'
 
-export default ({user, className = ""}: {user: User, className?: string}) => {
+export default ({id, className = ""}: {id: string, className?: string}) => {
+  // TODO: lookup by id
+  const image = getAvatarById(id);
+
   return (
 	<div className={className}>
-		{
-		user.avatar ? (
-			<div className="avatar-container">
-			<img src={user.avatar}/>
-			</div>
-		) : (
-			<div className="default-avatar">
-			<span>{user.name.split(" ").reduce((accum, n) => {
-			accum += n[0];
-			return accum;
-			}, "")}</span>
-			</div>
-		)
-		}
+    <div className="avatar-container">
+			<img src={`data:image/jpeg;base64,${image ? image.toString('base64') : ''}`}/>
+		</div>
 	</div>
   );
 };

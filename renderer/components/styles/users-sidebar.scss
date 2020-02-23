@@ -5,13 +5,7 @@
   box-sizing: border-box;
   align-items: center;
 
-  &.hovering {
-    align-items: flex-start;
-  }
-
   > button {
     margin-top: auto;
-    width: 100%;
-    background-color: gold;
   }
 }

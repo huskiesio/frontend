@@ -13,7 +13,7 @@ const Home: React.ComponentType = (): React.ReactElement<{}> => {
 		</Head>
 		<div className="home">
 		  <UsersSidebar className="users-sidebar"/>
-		  <Conversation className="conversation" header="A sample conversation" tagline="Hey that's pretty neat"/>
+		  <Conversation className="conversation" header="A sample conversation" tagline="Hey that's pretty neat" onHeaderChange={console.log} onTaglineChange={console.log}/>
 		</div>
 	</React.Fragment>
   );

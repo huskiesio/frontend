@@ -2,25 +2,20 @@ import React, {useState} from "react";
 import UserRow from "./user-row";
 import NewChatOverlay from "./new-chat-overlay";
 import "./styles/users-sidebar.scss";
-
-const users = [
-  {
-	name: "Max Isom",
-	avatar: "https://s3.amazonaws.com/keybase_processed_uploads/d24c7479498157f2cb81e185977dfd05_360_360.jpeg"
-  }
-];
+import {getUserById} from '../utils/user';
 
 export default ({className = ""}: {className: string}): React.ReactElement<{}> => {
-  const [hovering, setHovering] = useState(false);
   const [overlayOpen, showOverlay] = useState(false);
 
+  const users = [getUserById('1')];
+
   return (
-	<div className={`users-sidebar ${className} ${hovering ? "hovering" : ""}`} onMouseEnter={() => setHovering(true)} onMouseLeave={() => setHovering(false)}>
-		{users.map(user => <UserRow key={user.name} user={user} highlighted expanded={hovering}/>)}
+	<div className={`users-sidebar ${className}`}>
+		{users.map(user => <UserRow key={user.id} id={user.id} highlighted/>)}
 
-	<NewChatOverlay opened={true} onClose={() => showOverlay(false)} onNewChat={console.log}/>
+	<NewChatOverlay opened={overlayOpen} onClose={() => showOverlay(false)} onNewChat={console.log}/>
 
-	<button onClick={() => showOverlay(true)}>Add</button>
+	<button className="square inverted" onClick={() => showOverlay(true)}>+</button>
 	</div>
   );
 };
