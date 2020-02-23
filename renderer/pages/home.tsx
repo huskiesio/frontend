@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Head from "next/head";
-import Link from "next/link";
 import UsersSidebar from "../components/users-sidebar";
 import Conversation from "../components/conversation";
+
+import "./styles/home.scss";
 
 const Home: React.ComponentType = (): React.ReactElement<{}> => {
   return (
@@ -10,9 +11,9 @@ const Home: React.ComponentType = (): React.ReactElement<{}> => {
 		<Head>
 		  <title>HuskyChat</title>
 		</Head>
-		<div>
-		  <UsersSidebar/>
-		<Conversation/>
+		<div className="home">
+		  <UsersSidebar className="users-sidebar"/>
+		  <Conversation className="conversation" header="A sample conversation" tagline="Hey that's pretty neat"/>
 		</div>
 	</React.Fragment>
   );

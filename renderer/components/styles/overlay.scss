@@ -1,0 +1,23 @@
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:not(.opened) {
+    display: none;
+  }
+
+  .overlay-content {
+    pointer-events: all;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

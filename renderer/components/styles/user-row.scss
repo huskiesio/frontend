@@ -1,0 +1,23 @@
+.user-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .name {
+    display: none;
+    font-size: 1.2rem;
+  }
+
+  // Modifiers
+  &.expanded {
+    .name {
+      display: block;
+    }
+  }
+
+  &.highlighted {
+    .default-avatar, .avatar img {
+      border: 2px solid yellow;
+    }
+  }
+}
