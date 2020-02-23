@@ -1,4 +1,5 @@
 import React, {useEffect} from "react";
+import {useRouter} from 'next/router'
 import {setGlobal} from "reactn";
 import {ipcRenderer} from "electron";
 import {loadThreads} from "../utils/threads";
@@ -9,16 +10,31 @@ loadThreads().then(threads => {
   setGlobal({
 	threads,
 	currentThread: threads[0].id,
-	currentUserId: "1"
+  currentUser: {
+    id: 'fake'
+  }
   });
 });
 
 export default ({ Component, pageProps }: {Component: React.ComponentType, pageProps: any}): React.ReactElement<{}> => {
-  // Add event listeners on client
+  const router = useRouter();
+
   useEffect(() => {
+    // Add event listeners on client
 	ipcRenderer.on("new-message", (_, msg: IHCBotMessage) => {
 		console.log(msg);
 	});
+
+  // Redirect to sign in if necessary
+  ipcRenderer.invoke("is-signed-in").then(signedIn => {
+    if (!signedIn) {
+      router.push('/signin')
+    }
+  });
+
+  ipcRenderer.invoke("get-user-info").then(userInfo => {
+    setGlobal({currentUser: userInfo})
+  })
   }, []);
 
   return (

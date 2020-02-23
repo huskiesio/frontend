@@ -10,8 +10,6 @@ const ENTER: number = 13;
 
 export default ({className, thread, onHeaderChange, onTaglineChange, onNewMessage}: {className: string, thread: StuffedThread, onHeaderChange: Function, onTaglineChange: Function, onNewMessage: Function}): React.ReactElement<{}> => {
   const messageContainerRef: React.RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
-
-  const userId = useGlobal("currentUserId")[0];
   const threadId = useGlobal("currentThread")[0];
 
   const [isHeaderBeingEdited, editHeader] = useState(false);
