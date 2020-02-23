@@ -1,44 +1,39 @@
-import {StuffedThread} from '../types'
+import {StuffedThread} from "../types";
+import { IHCBotUser, IHCBotThread, IHCBotMessage } from "@huskiesio/bot/dts/types";
 
 export const loadThreads = async (): Promise<StuffedThread[]> => {
+  const user: IHCBotUser = {
+		firstName: () => "Max",
+		lastName: () => "Isom",
+		username: () => "mtisom",
+		avatar: () => Promise.resolve(Buffer.from("")),
+		publicKey: () => Buffer.from("asdf"),
+		id: "1",
+		createdAt: new Date().getTime(),
+		updatedAt: new Date().getTime(),
+	};
+
+  const thread: IHCBotThread = {
+	name: () => "Test Thread",
+	description: () => "Catchy tagline",
+	id: "1",
+	createdAt: new Date().getTime(),
+	updatedAt: new Date().getTime(),
+  };
+
+  const msg: IHCBotMessage = {
+	sender: () => user,
+	thread: () => thread,
+	payload: () => "**Bolded text**",
+	timestamp: () => new Date().getTime()
+  };
+
   const seed = [
-    {
-      name: 'Test Thread',
-      description: 'Catchy tagline',
-      memberIds: ['1'],
-      id: '1',
-      createdAt: new Date().getTime(),
-      updatedAt: new Date().getTime(),
-      messages: [
-        {
-          senderId: '1',
-          threadId: '1',
-          payload: Buffer.from('**Bolded text**'),
-          id: '1',
-          createdAt: new Date().getTime(),
-          updatedAt: new Date().getTime()
-        }
-      ]
-    },
-    {
-      name: 'Thread 2',
-      description: 'Catchy tagline',
-      memberIds: ['1'],
-      id: '2',
-      createdAt: new Date().getTime(),
-      updatedAt: new Date().getTime(),
-      messages: [
-        {
-          senderId: '1',
-          threadId: '2',
-          payload: Buffer.from('**Different text**'),
-          id: '4',
-          createdAt: new Date().getTime(),
-          updatedAt: new Date().getTime()
-        }
-      ]
-    }
+	{
+		...thread,
+		messages: [msg]
+	}
   ];
 
   return seed;
-}
+};

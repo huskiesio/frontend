@@ -1,6 +1,6 @@
 import React from "react";
 import "./styles/avatar.scss";
-import {getAvatarById} from '../utils/user'
+import {getAvatarById} from "../utils/user";
 
 export default ({id, className = ""}: {id: string, className?: string}) => {
   // TODO: lookup by id
@@ -8,8 +8,8 @@ export default ({id, className = ""}: {id: string, className?: string}) => {
 
   return (
 	<div className={className}>
-    <div className="avatar-container">
-			<img src={`data:image/jpeg;base64,${image ? image.toString('base64') : ''}`}/>
+	<div className="avatar-container">
+			<img src={`data:image/jpeg;base64,${image ? image.toString("base64") : ""}`}/>
 		</div>
 	</div>
   );

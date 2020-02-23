@@ -1,25 +1,27 @@
 import React, {useEffect} from "react";
-import {useGlobal} from 'reactn';
+import {useGlobal} from "reactn";
 import Head from "next/head";
 import UsersSidebar from "../components/users-sidebar";
 import Conversation from "../components/conversation";
-import {sendMessage} from '../utils/messages';
+import {sendMessage} from "../utils/messages";
+import { IHCBotMessage } from "@huskiesio/bot/dts/types";
 import "./styles/home.scss";
-import { UnsavedMessage } from "../types";
 
 const Home: React.ComponentType = (): React.ReactElement<{}> => {
-  const [currentThread] = useGlobal('currentThread');
-  const [threads, setThreads] = useGlobal('threads');
+  const [currentThread] = useGlobal("currentThread");
+  const [threads, setThreads] = useGlobal("threads");
 
   const thisThread = threads.find(t => t.id === currentThread);
 
-  const handleNewMessage = (msg: UnsavedMessage) => {
-    sendMessage(msg);
+  const handleNewMessage = async (msg: IHCBotMessage) => {
+	const res = await sendMessage(msg);
 
-    thisThread.messages.push(msg);
+	console.log(res);
 
-    setThreads([...threads.filter(t => t.id !== currentThread), thisThread])
-  }
+	// thisThread.messages.push(msg);
+	//
+	// setThreads([...threads.filter(t => t.id !== currentThread), thisThread])
+  };
 
   return (
 	<React.Fragment>

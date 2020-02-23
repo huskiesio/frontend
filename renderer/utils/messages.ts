@@ -1,5 +1,6 @@
-import { UnsavedMessage } from "../types";
+import {ipcRenderer} from "electron";
+import { IHCBotMessage } from "@huskiesio/bot/dts/types";
 
-export const sendMessage = (msg: UnsavedMessage) => {
-  return;
-}
+export const sendMessage = (msg: IHCBotMessage) => {
+  return ipcRenderer.invoke("send-message", msg);
+};

@@ -1,6 +1,7 @@
 import { app, BrowserWindow } from "electron";
 import serve from "electron-serve";
 import { createWindow } from "./helpers";
+import { registerHandlers } from "./api/ipc-handler";
 
 const isProd: boolean = process.env.NODE_ENV === "production";
 
@@ -12,7 +13,7 @@ if (isProd) {
   app.setPath("userData", `${app.getPath("userData")} (development)`);
 }
 
-(async (): void => {
+(async (): Promise<void> => {
   await app.whenReady();
 
   const mainWindow: BrowserWindow = createWindow("main", {
@@ -27,6 +28,8 @@ if (isProd) {
 	await mainWindow.loadURL(`http://localhost:${port}/home`);
 	mainWindow.webContents.openDevTools();
   }
+
+  registerHandlers(mainWindow.webContents); // Handlers are now ready to go.
 })();
 
 app.on("window-all-closed", (): void => {

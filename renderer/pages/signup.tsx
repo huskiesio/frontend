@@ -40,7 +40,7 @@ export default (): React.ReactElement<{}> => {
 			<input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)}/>
 			<input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)}/>
 		<input placeholder="Device name" value={deviceName} onChange={e => setDeviceName(e.target.value)}/>
-			<button>Sign up</button>
+			<button className="blue">Sign up</button>
 			</form>
 		)}
 		</div>

@@ -2,35 +2,38 @@ import React from "react";
 import MessageRenderer from "@huskiesio/message-renderer";
 import Avatar from "./avatar";
 import "./styles/message.scss";
-import {getUserById} from '../utils/user';
+import { ReducedMessage } from "../types";
+import { IHCBotMessage } from "@huskiesio/bot/dts/types";
 
 const self = "1";
 
 export default ({message}: {message: ReducedMessage}): React.ReactElement<{}> => {
+  const isSelfMessage = (msg: ReducedMessage) => msg.sender().id === self;
+
   return (
-	<div className={`message-container ${message.senderId === self ? "self" : ""}`}>
+	<div className={`message-container ${isSelfMessage(message) ? "self" : ""}`}>
 		{
-		message.senderId === self ? <div/> : (
-			<Avatar id={message.senderId}/>
+		isSelfMessage(message) ? <div/> : (
+			<Avatar id={message.sender().id}/>
 		)
 		}
 
 		<div className="info-container">
-		<div className="name">{`${getUserById(message.senderId).firstName} ${getUserById(message.senderId).lastName}`}</div>
+		<div className="name">{`${message.sender().firstName()} ${message.sender().lastName()}`}</div>
 
 	<div className="messages-list">
 		{
 		message.messages.map(m => <div>
-      <MessageRenderer text={m.payload.toString()} className="message"/>
-      <div className="timestamp">{new Date(m.updatedAt).toLocaleString()}</div>
-    </div>)
+		<MessageRenderer text={m.payload()} className="message"/>
+		<div className="timestamp">{new Date(m.timestamp()).toLocaleString()}</div>
+	</div>)
 		}
 	</div>
 		</div>
 
 		{
-		message.senderId === self ? (
-			<Avatar id={message.senderId}/>
+		isSelfMessage(message) ? (
+			<Avatar id={message.sender().id}/>
 		) : (
 			<div/>
 		)
