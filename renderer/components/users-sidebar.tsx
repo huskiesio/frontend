@@ -1,17 +1,21 @@
 import React, {useState} from "react";
+import {useGlobal} from 'reactn';
 import UserRow from "./user-row";
 import NewChatOverlay from "./new-chat-overlay";
 import "./styles/users-sidebar.scss";
-import {getUserById} from '../utils/user';
 
 export default ({className = ""}: {className: string}): React.ReactElement<{}> => {
   const [overlayOpen, showOverlay] = useState(false);
+  const [threads] = useGlobal('threads');
+  const [currentThread, setCurrentThread] = useGlobal('currentThread');
 
-  const users = [getUserById('1')];
+  const handleThreadSwitch = (id: string) => {
+    setCurrentThread(id);
+  }
 
   return (
 	<div className={`users-sidebar ${className}`}>
-		{users.map(user => <UserRow key={user.id} id={user.id} highlighted/>)}
+		{threads.map(thread => <UserRow className="chat-user-group" onClick={() => handleThreadSwitch(thread.id)} key={thread.id} id={thread.memberIds[0]} highlighted={thread.id === currentThread}/>)}
 
 	<NewChatOverlay opened={overlayOpen} onClose={() => showOverlay(false)} onNewChat={console.log}/>
 
