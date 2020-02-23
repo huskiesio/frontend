@@ -1,0 +1,8 @@
+.message-composer {
+  display: flex;
+
+  textarea {
+    flex-grow: 1;
+    overflow-y: hidden;
+  }
+}

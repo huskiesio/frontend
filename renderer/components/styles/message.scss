@@ -1,0 +1,63 @@
+.message-container {
+  display: flex;
+  flex-direction: row;
+
+  &.self {
+    margin-left: auto;
+
+    .name {
+      text-align: right;
+    }
+
+    .info-container {
+      .messages-list {
+        .message {
+          background-color: lighten(black, 40%);
+        }
+      }
+    }
+
+    .timestamp {
+      text-align: right;
+    }
+  }
+
+  .info-container {
+    .name {
+      margin-bottom: 0.5rem;
+    }
+
+    .messages-list {
+      display: flex;
+      flex-direction: column;
+
+      .timestamp {
+        color: gray;
+        font-size: 0.5rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .message {
+        background-color: gold;
+        color: black;
+        border-radius: 10px;
+        padding: 0.2rem 1rem;
+        align-self: flex-start;
+
+        &:not(:first-child) {
+          margin-top: 1rem;
+        }
+
+        pre {
+          border-radius: 5px;
+          padding: 0.5rem;
+        }
+      }
+    }
+
+    margin-right: 1rem;
+  }
+
+  margin-bottom: 2rem;
+}

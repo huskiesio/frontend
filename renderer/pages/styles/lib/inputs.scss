@@ -1,0 +1,77 @@
+textarea, input {
+  background-color: lighten(black, 20%);
+  border: none;
+  outline: none;
+  font-size: 1.2rem;
+  height: 1.2rem;
+  padding: 1rem;
+  line-height: 1.2rem;
+  border-radius: 10px;
+  resize: none;
+  color: #FAFAFA;
+
+  &.inline {
+    background: transparent;
+    border-radius: 0;
+    padding-left: 0;
+  }
+
+  &.h1, &.h3 {
+    height: auto;
+    line-height: auto;
+    padding: 0;
+    font-weight: bold;
+  }
+
+  &.h1 {
+    font-size: 2rem;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+  }
+
+  &.h3 {
+    font-size: 1.17rem;
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+}
+
+button {
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  &.blue {
+    background-color: blue;
+    color: white;
+
+    &:hover {
+      background-color: darken(blue, 20%);
+    }
+  }
+
+  &.inverted {
+    background-color: black;
+    color: white;
+
+    &:hover {
+      background-color: lighten(black, 30%);
+    }
+  }
+
+  &.square {
+    width: 3rem;
+    height: 3rem;
+  }
+}

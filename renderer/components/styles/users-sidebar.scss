@@ -1,0 +1,15 @@
+.users-sidebar {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  box-sizing: border-box;
+  align-items: center;
+
+  .chat-user-group {
+    margin-bottom: 1rem;
+  }
+
+  > button {
+    margin-top: auto;
+  }
+}

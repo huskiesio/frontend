@@ -1,0 +1,20 @@
+@font-face {
+  font-family: 'Soin Sans Neue';
+  src: url('/fonts/SoinSansNeue-Bold.otf') format('opentype');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'Soin Sans Neue';
+  src: url('/fonts/SoinSansNeue-Roman.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Soin Sans Neue';
+  src: url('/fonts/SoinSansNeue-Thin.otf') format('opentype');
+  font-weight: 200;
+}
+
+.weight-normal {
+  font-weight: normal;
+}

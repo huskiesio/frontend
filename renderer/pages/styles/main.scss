@@ -1,2 +1,24 @@
 @import "lib/highlight.js.min";
 @import "lib/katex.min";
+
+@import "lib/box";
+@import "lib/fonts";
+@import "lib/inputs";
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: black;
+  color: #FAFAFA;
+}
+
+* {
+  font-family: 'Soin Sans Neue', Helvetica, sans-serif;
+}
+
+.container {
+  display: flex;
+  height: calc(100vh - 2rem);
+}
