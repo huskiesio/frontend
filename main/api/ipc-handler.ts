@@ -42,22 +42,17 @@ export function registerHandlers(webContents: WebContents): void {
 
 	let bot: HuskyChatBot = undefined as unknown as HuskyChatBot;
 	
-	ipcMain.handle("send-message", async (event: IpcMainInvokeEvent, args: { threadID: string, message: string }): Promise<Message> => {
+	ipcMain.handle("send-message", async (event: IpcMainInvokeEvent, args: { threadID: string, message: string }): Promise<void> => {
 		
 		if (bot === undefined) throw getUninitializedBotError("send-message");
-		else {
-			
-			let threadID: string = await bot.chat().send(args.threadID, args.message);
-			return undefined as unknown as Message;
-			
-		}
+		else await bot.chat().send(args.threadID, args.message);
 		
 	});
 
-	ipcMain.handle("create-conversation", async (event: IpcMainInvokeEvent, args: {  }): Promise<any> => {
+	ipcMain.handle("create-conversation", async (event: IpcMainInvokeEvent, args: { name: string, description: string, members: string[] }): Promise<string> => {
 
 		if (bot === undefined) throw getUninitializedBotError("create-conversation");
-		// else TODO [2/22/20 @ 8:22 PM] - Finish the 'new-conversation' method.
+		else return bot.chat().createThread(args.name, args.description, args.members);
 
 	});
 
@@ -88,7 +83,7 @@ export function registerHandlers(webContents: WebContents): void {
 		
 	});
 	
-	ipcMain.handle("sign-up-finish", async (event: IpcMainInvokeEvent, args: { code: string, token: string }): Promise<string> => {
+	ipcMain.handle("sign-up-finish", async (event: IpcMainInvokeEvent, args: { code: string, token: string }): Promise<void> => {
 		
 		return HuskyChatBot.signUpFinish(args.code, args.token);
 		
@@ -96,7 +91,7 @@ export function registerHandlers(webContents: WebContents): void {
 	
 	ipcMain.handle("sign-in", async (event: IpcMainInvokeEvent, args: { username: string, password: string }): Promise<void> => {
 		
-		bot = await HuskyChatBot.signIn(args.username, args.password, undefined as any); // TODO [2/23/20 @ 3:42 AM] - Change me!
+		bot = await HuskyChatBot.signIn(args.username, args.password);
 		
 	});
 	
@@ -122,7 +117,7 @@ export function registerHandlers(webContents: WebContents): void {
 		
 	});
 	
-	bot.chat().onReceived(async (message: HCBotChatOnReceivedParam): Promise<void> => {
+	bot.chat().onReceived(async (message: HCBotChatOnReceivedParam): Promise<boolean> => {
 		
 		webContents.send("new-message", message);
 
@@ -130,7 +125,7 @@ export function registerHandlers(webContents: WebContents): void {
 	
 	bot.chat().onThreadUpdated(async(threadID: string): Promise<void> => {
 		
-		let thread: IHCBotThread = await bot.chat().getThreadForId(threadID);
+		let thread: IHCBotThread = await bot.chat().getThreadForId(threadID) as IHCBotThread;
 		
 		let update: ThreadUpdateNotification = {
 			
