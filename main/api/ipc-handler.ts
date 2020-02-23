@@ -42,6 +42,8 @@ export function registerHandlers(webContents: WebContents): void {
 
 	let bot: HuskyChatBot = undefined as unknown as HuskyChatBot;
 	
+	HuskyChatBot.SOCKET_ADDRESS = "141.219.220.40:3000";
+	
 	ipcMain.handle("send-message", async (event: IpcMainInvokeEvent, args: { threadID: string, message: string }): Promise<void> => {
 		
 		if (bot === undefined) throw getUninitializedBotError("send-message");
