@@ -1,13 +1,14 @@
 import React from "react";
 import MessageRenderer from "@huskiesio/message-renderer";
+import {useGlobal} from 'reactn'
 import Avatar from "./avatar";
 import "./styles/message.scss";
 import { ReducedMessage } from "../types";
 import { IHCBotMessage } from "@huskiesio/bot/dts/types";
 
-const self = "1";
-
 export default ({message}: {message: ReducedMessage}): React.ReactElement<{}> => {
+  const self = useGlobal("currentUser")[0].id;
+
   const isSelfMessage = (msg: ReducedMessage) => msg.sender().id === self;
 
   return (

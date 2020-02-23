@@ -9,6 +9,8 @@ export default (): React.ReactElement<{}> => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [deviceName, setDeviceName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [code, setCode] = useState("");
 
   const handleFirstStep: React.FormEventHandler = (e: React.FormEvent): void => {
@@ -40,6 +42,8 @@ export default (): React.ReactElement<{}> => {
 			<input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)}/>
 			<input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)}/>
 		<input placeholder="Device name" value={deviceName} onChange={e => setDeviceName(e.target.value)}/>
+      <input placeholder="First name" value={firstName} onChange={e => setFirstName(e.target.value)}/>
+      <input placeholder="Last name" value={lastName} onChange={e => setLastName(e.target.value)}/> 
 			<button className="blue">Sign up</button>
 			</form>
 		)}
