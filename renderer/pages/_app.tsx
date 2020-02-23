@@ -29,12 +29,12 @@ export default ({ Component, pageProps }: {Component: React.ComponentType, pageP
   ipcRenderer.invoke("is-signed-in").then(signedIn => {
     if (!signedIn) {
       router.push('/signin')
+    } else {
+      ipcRenderer.invoke("get-user-info").then(userInfo => {
+        setGlobal({currentUser: userInfo})
+      })
     }
   });
-
-  ipcRenderer.invoke("get-user-info").then(userInfo => {
-    setGlobal({currentUser: userInfo})
-  })
   }, []);
 
   return (

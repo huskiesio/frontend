@@ -1,29 +1,29 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {useGlobal} from "reactn";
 import Head from "next/head";
 import UsersSidebar from "../components/users-sidebar";
 import Conversation from "../components/conversation";
 import {sendMessage} from "../utils/messages";
 import { IHCBotMessage } from "@huskiesio/bot/dts/types";
-import {getUserById} from '../utils/user';
 import "./styles/home.scss";
 
 const Home: React.ComponentType = (): React.ReactElement<{}> => {
   const [currentThread] = useGlobal("currentThread");
   const [threads, setThreads] = useGlobal("threads");
+  const [currentUser] = useGlobal("currentUser");
 
   const thisThread = threads.find(t => t.id === currentThread);
 
   const handleNewMessage = async (msg: any) => {
-    // For testing. Should be stripped out and replaced with res.
-    msg.sender = () => getUserById('1');
-    msg.payload = () => msg.message
-    msg.timestamp = () => new Date().getTime()
-	// const res = await sendMessage(msg);
-  //
-	// console.log(res);
+    await sendMessage(msg);
 
-	thisThread.messages.push(msg);
+    const savedMsg = {
+      sender: () => currentUser,
+      payload: () => msg.message,
+      timestamp: () => new Date().getTime()
+    }
+
+	thisThread.messages.push(savedMsg);
 
 	setThreads([...threads.filter(t => t.id !== currentThread), thisThread])
   };
